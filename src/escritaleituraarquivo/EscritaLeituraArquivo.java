@@ -13,6 +13,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -25,6 +27,9 @@ public class EscritaLeituraArquivo {
      */
     public static void main(String[] args) throws FileNotFoundException, IOException {
 
+        
+            verificaStringPar("123");
+        
         System.out.println("### Conteudo atual do arquivo ###");
         BufferedReader reader = new BufferedReader(new FileReader("meuArquivo.txt"));
         String line = reader.readLine();
@@ -49,6 +54,20 @@ public class EscritaLeituraArquivo {
 
         fileWriter.close();
 
+    }
+
+    private static void verificaStringPar(String valor) {
+        if (valor.length() % 2 != 0) {
+            throw new StringParException();
+        }
+    }
+    //...
+    public static class StringParException extends RuntimeException {
+
+        @Override
+        public String getMessage() {
+            return "String deve ter um número par de caracteres";
+        }
     }
 
 }
